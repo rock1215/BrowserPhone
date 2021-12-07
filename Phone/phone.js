@@ -993,7 +993,7 @@ function InitUi(){
     leftHTML += "<div style=\"margin-left:5px; margin-right:5px; margin-bottom: 5px; border-top:1px solid #383838\"></div>";
 
     // Action Buttons
-    leftHTML += "<div style=\"padding-left:5px; padding-right:5px; display: none;\">";
+    leftHTML += "<div style=\"padding-left:5px; padding-right:5px\">";
     leftHTML += "<button id=BtnFindBuddy><i class=\"fa fa-search\"></i></button>";
     leftHTML += "<span id=divFindBuddy class=searchClean style=\"display:none\"><INPUT id=txtFindBuddy type=text autocomplete=none style=\"width:120px;\"></span>";
     leftHTML += "<button id=BtnFreeDial><i class=\"fa fa-phone\"></i></button>";
