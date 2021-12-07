@@ -1303,6 +1303,8 @@ function InitUi() {
   PreloadAudioFiles();
 
   CreateUserAgent();
+
+  ShowDial(this);
 }
 function ShowMyProfileMenu(obj) {
   var enabledHtml =
