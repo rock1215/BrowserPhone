@@ -671,7 +671,7 @@ function AddSomeoneWindow(numberStr){
     buttons.push({
         text: lang.cancel,
         action: function(){
-            ShowDial();
+            ShowContacts();
         }
     });
     $.each(buttons, function(i,obj){
@@ -993,7 +993,7 @@ function InitUi(){
     leftHTML += "<div style=\"margin-left:5px; margin-right:5px; margin-bottom: 5px; border-top:1px solid #383838\"></div>";
 
     // Action Buttons
-    leftHTML += "<div style=\"padding-left:5px; padding-right:5px; display:none;\">";
+    leftHTML += "<div style=\"padding-left:5px; padding-right:5px; display: none;\">";
     leftHTML += "<button id=BtnFindBuddy><i class=\"fa fa-search\"></i></button>";
     leftHTML += "<span id=divFindBuddy class=searchClean style=\"display:none\"><INPUT id=txtFindBuddy type=text autocomplete=none style=\"width:120px;\"></span>";
     leftHTML += "<button id=BtnFreeDial><i class=\"fa fa-phone\"></i></button>";
@@ -7017,7 +7017,7 @@ function ShowDial(){
     $("#myContacts").hide();
     $("#actionArea").empty();
 
-    var html = "<div style=\"text-align:right; display:none;\"><button onclick=\"ShowContacts()\"><i class=\"fa fa-close\"></i></button></div>"
+    var html = "<div style=\"text-align:right\"><button onclick=\"ShowContacts()\"><i class=\"fa fa-close\"></i></button></div>"
     html += "<div style=\"text-align:center\"><input id=dialText class=dialTextInput oninput=\"handleDialInput(this, event)\" onkeydown=\"dialOnkeydown(event, this)\" style=\"width:160px; margin-top:15px\"></div>";
     html += "<table cellspacing=10 cellpadding=0 style=\"margin-left:auto; margin-right: auto\">";
     html += "<tr><td><button class=dialButtons onclick=\"KeyPress('1')\"><div>1</div><span>&nbsp;</span></button></td>"
@@ -9991,7 +9991,7 @@ function ShowMyProfile(){
     buttons.push({
         text: lang.cancel,
         action: function(){
-            ShowDial();
+            ShowContacts();
         }
     });
     $.each(buttons, function(i,obj){
