@@ -453,7 +453,7 @@ function UpdateUI() {
 // UI Windows
 // ==========
 function AddSomeoneWindow(numberStr) {
-  ShowContacts();
+  //ShowContacts();
 
   $("#myContacts").hide();
   $("#actionArea").empty();
@@ -719,7 +719,7 @@ function AddSomeoneWindow(numberStr) {
 
       UpdateBuddyList();
 
-      ShowContacts();
+      //ShowContacts();
     },
   });
   buttons.push({
@@ -770,6 +770,7 @@ function AddSomeoneWindow(numberStr) {
         $("#RowContact2").show();
       }
     });
+    ShowDial(this);
   }, 0);
 }
 function CreateGroupWindow() {
@@ -7736,7 +7737,7 @@ var Line = function (lineNumber, displayName, displayNumber, buddyObj) {
   this.RemoteSoundMeter = null;
 };
 function ShowDial(obj) {
-  ShowContacts();
+  //ShowContacts();
 
   $("#myContacts").hide();
   $("#actionArea").empty();
@@ -7911,7 +7912,7 @@ function DialByLine(type, buddy, numToDial, CallerID) {
     return;
   }
 
-  ShowContacts();
+  //ShowContacts();
 
   // Create a Buddy if one is not already existing
   var buddyObj = buddy ? FindBuddyByIdentity(buddy) : FindBuddyByDid(numDial);
