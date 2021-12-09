@@ -16009,18 +16009,18 @@ function ShowLogin(loginType) {
   html += "<div class=UiText>Account</div>";
 
   html +=
-    "<div><input id='email' class=UiInputText type=text placeholder='Email' value=''></div>";
+    "<div><input id='email' class=UiInputText type=email placeholder='Email' value=''></div>";
 
   html += "<div class=UiText>Password</div>";
 
   html +=
-    "<div><input id='password' class=UiInputText type=text placeholder='Password' value=''></div>";
+    "<div><input id='password' class=UiInputText type=password placeholder='Password' value=''></div>";
 
   if (loginType === "regist") {
     html += "<div class=UiText>Confirm</div>";
 
     html +=
-      "<div><input id='confirm' class=UiInputText type=text placeholder='Confirm' value=''></div>";
+      "<div><input id='confirm' class=UiInputText type=password placeholder='Confirm' value=''></div>";
   }
 
   html += "<div class=UiWindowButtonBar id=ButtonBar></div>";
