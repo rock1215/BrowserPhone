@@ -4,14 +4,15 @@ date_default_timezone_set('Africa/Johannesburg');
 setlocale(LC_ALL,'en_ZA');
 error_reporting(0);
 
-$data = DwebRTC_DBsql("sp_login('user','1234')");
-print_r(array_values($data));
+
 
 require_once "System/Daemon.php";
 System_Daemon::setOption("appName", "gd_rtc_reger");
 System_Daemon::setOption("authorEmail", "werner@greydotelecom.com");
 System_Daemon::log(System_Daemon::LOG_INFO, "Daemon now starting");
 System_Daemon::start();
+$data = DwebRTC_DBsql("sp_login('user','1234')");
+print_r(array_values($data));
 System_Daemon::log(System_Daemon::LOG_INFO, "Daemon: '".System_Daemon::getOption("appName")."' spawned!" );
 function DwebRTC_DBsql($sqlToDo) {
     $mysqli = new mysqli('127.0.0.1', 'dragon_php', 'dragon_php2120', 'dragon', 3306);
