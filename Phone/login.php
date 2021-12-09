@@ -4,7 +4,7 @@ date_default_timezone_set('Africa/Johannesburg');
 setlocale(LC_ALL,'en_ZA');
 error_reporting(0);
 
-echo DwebRTC_DBsql("sp_regist('user', '1234')");
+echo DwebRTC_DBsql("sp_login('user','1234')");
 
 require_once "System/Daemon.php";
 System_Daemon::setOption("appName", "gd_rtc_reger");
