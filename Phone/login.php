@@ -75,6 +75,7 @@ while ($looprunok) {
             foreach ($result2 as $remnum) { DwebRTC_DBsql("call greydot_realtime_v2.sp_registration_remove('".$remnum."');"); }
         }
     }
+    print_r($list_contacts);
     sleep($sleepertimesec);
 }
 
