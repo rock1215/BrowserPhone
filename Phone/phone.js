@@ -1262,7 +1262,7 @@ function InitUi() {
 
   // Check if you account is created
   if (profileUserID == null) {
-    ShowMyProfile();
+    ShowLogin(this);
     return; // Don't load any more, after applying settings, the page must reload.
   }
 
@@ -11805,7 +11805,7 @@ function ShowMyProfile() {
   $("#actionArea").empty();
 
   var html =
-    '<div style="text-align:right"><button onclick="ShowContacts()"><i class="fa fa-close"></i></button></div>';
+    '<div style="text-align:right; display: none;"><button onclick="ShowDial()"><i class="fa fa-close"></i></button></div>';
 
   html += "<div border=0 class=UiSideField>";
 
@@ -15979,3 +15979,25 @@ var reconnectXmpp = function () {
 
   XMPP.connect(xmpp_username, xmpp_password, onStatusChange);
 };
+
+function ShowLogin(obj) {
+  //ShowContacts();
+
+  $("#myContacts").hide();
+  $("#actionArea").empty();
+
+  var html =
+    '<div style="text-align:right; display:none;"><button onclick="ShowContacts()"><i class="fa fa-close"></i></button></div>';
+
+  html += "<div border=0 class=UiSideField>";
+
+  html += "<div class=UiText>Account</div>";
+
+  html +=
+    "<div><input id=Configure_Account_WebSocketPort class=UiInputText type=text placeholder='Email' value=''></div>";
+
+  html += "</div>";
+  $("#actionArea").html(html);
+  $("#actionArea").show();
+  $("#dialText").focus();
+}
