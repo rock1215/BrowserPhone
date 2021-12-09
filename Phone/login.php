@@ -13,7 +13,7 @@ System_Daemon::log(System_Daemon::LOG_INFO, "Daemon now starting");
 System_Daemon::start();
 System_Daemon::log(System_Daemon::LOG_INFO, "Daemon: '".System_Daemon::getOption("appName")."' spawned!" );
 function DwebRTC_DBsql($sqlToDo) {
-    $mysqli = new mysqli('localhost', 'dragon_php', 'dragon_php2120', 'dragon');
+    $mysqli = new mysqli('127.0.0.1', 'dragon_php', 'dragon_php2120', 'dragon', 3306);
     mysqli_set_charset($mysqli,'utf8');
     $payload = array();
     if ($result = $mysqli->query($sqlToDo)) {
