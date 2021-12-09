@@ -16016,6 +16016,13 @@ function ShowLogin(loginType) {
   html +=
     "<div><input id='password' class=UiInputText type=text placeholder='Password' value=''></div>";
 
+  if (loginType === "regist") {
+    html += "<div class=UiText>Confirm</div>";
+
+    html +=
+      "<div><input id='confirm' class=UiInputText type=text placeholder='Confirm' value=''></div>";
+  }
+
   html += "<div class=UiWindowButtonBar id=ButtonBar></div>";
 
   html +=
