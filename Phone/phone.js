@@ -1262,7 +1262,7 @@ function InitUi() {
 
   // Check if you account is created
   if (profileUserID == null) {
-    ShowLogin(this);
+    ShowLogin("login");
     return; // Don't load any more, after applying settings, the page must reload.
   }
 
@@ -15980,18 +15980,31 @@ var reconnectXmpp = function () {
   XMPP.connect(xmpp_username, xmpp_password, onStatusChange);
 };
 
-function ShowLogin(obj) {
+function ShowLogin(loginType) {
   //ShowContacts();
 
   $("#myContacts").hide();
   $("#actionArea").empty();
+
+  var title = "Regist";
+  var buttonName = "Regist";
+  var text = "Already Sign Up?";
+  var link = "Login";
+
+  if (loginType === "login") {
+    title = "Login";
+    buttonName = "Login";
+    text = "Do you have already an account?";
+    link = "Sign Up";
+  }
 
   var html =
     '<div style="text-align:right; display:none;"><button onclick="ShowContacts()"><i class="fa fa-close"></i></button></div>';
 
   html += "<div border=0 class=UiSideField>";
 
-  html += "<div class=UiText style='margin-top: 20px;'><h1>Login</h1></div>";
+  html +=
+    "<div class=UiText style='margin-top: 20px;'><h1>" + title + "</h1></div>";
 
   html += "<div class=UiText>Account</div>";
 
@@ -16006,7 +16019,11 @@ function ShowLogin(obj) {
   html += "<div class=UiWindowButtonBar id=ButtonBar></div>";
 
   html +=
-    "<div class=UiText><span>Do you have already Account?<a id='regist' style='color: white' href='#'>Regist</a></span></div>";
+    "<div class=UiText><span>" +
+    text +
+    "<a id='regist' style='color: white; margin-left: 10px;' href='#'>" +
+    link +
+    "</a></span></div>";
 
   html += "</div>";
 
@@ -16014,12 +16031,9 @@ function ShowLogin(obj) {
 
   // Buttons
   var buttons = [];
+
   buttons.push({
-    text: "Login",
-    action: function () {},
-  });
-  buttons.push({
-    text: "Regist",
+    text: buttonName,
     action: function () {
       //ShowContacts();
     },
@@ -16030,7 +16044,11 @@ function ShowLogin(obj) {
   });
 
   $("#regist").click(function () {
-    console.log("Regist");
+    if (loginType === "login") {
+      ShowLogin("regist");
+    } else {
+      ShowLogin("login");
+    }
     return false;
   });
 
