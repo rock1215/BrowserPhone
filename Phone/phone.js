@@ -16006,7 +16006,7 @@ function ShowLogin(obj) {
   html += "<div class=UiWindowButtonBar id=ButtonBar></div>";
 
   html +=
-    "<div class=UiText style='diplay: flex!; flex-direction: row;'><h3>Do you have already Account?</h3> <a id='regist' style='color: white' href='#'>Regist</a></div>";
+    "<div class=UiText><span>Do you have already Account?<a id='regist' style='color: white' href='#'>Regist</a></span></div>";
 
   html += "</div>";
 
