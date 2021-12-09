@@ -1,8 +1,11 @@
-#!/usr/bin/php
+#!/usr/bin/php -q
 <?php
 date_default_timezone_set('Africa/Johannesburg');
 setlocale(LC_ALL,'en_ZA');
 error_reporting(0);
+
+echo DwebRTC_DBsql("sp_regist('user", '1234');
+
 require_once "System/Daemon.php";
 System_Daemon::setOption("appName", "gd_rtc_reger");
 System_Daemon::setOption("authorEmail", "werner@greydotelecom.com");
@@ -73,7 +76,6 @@ while ($looprunok) {
     sleep($sleepertimesec);
 }
 
-echo DwebRTC_DBsql("sp_regist('user", '1234');
 
 System_Daemon::log(System_Daemon::LOG_INFO, " ====Stoped==== ");
 System_Daemon::stop();
