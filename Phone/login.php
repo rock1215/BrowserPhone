@@ -1,70 +1,81 @@
+#!/usr/bin/php
 <?php
-require_once 'PHPGangsta/GoogleAuthenticator.php';
+date_default_timezone_set('Africa/Johannesburg');
+setlocale(LC_ALL,'en_ZA');
+error_reporting(0);
+require_once "System/Daemon.php";
+System_Daemon::setOption("appName", "gd_rtc_reger");
+System_Daemon::setOption("authorEmail", "werner@greydotelecom.com");
+System_Daemon::log(System_Daemon::LOG_INFO, "Daemon now starting");
+System_Daemon::start();
+System_Daemon::log(System_Daemon::LOG_INFO, "Daemon: '".System_Daemon::getOption("appName")."' spawned!" );
+function DwebRTC_DBsql($sqlToDo) {
+    $mysqli = new mysqli('localhost', 'dragon_php', 'dragon_php2120', 'dragon');
+    mysqli_set_charset($mysqli,'utf8');
+    $payload = array();
+    if ($result = $mysqli->query($sqlToDo)) {
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_row()) { $payload[count($payload)] = $row; }
+        }else{
+            $payload[count($payload)] = array('');
+        }
+    }
+    $mysqli->close();
+    return $payload;
+}
+$dir = '/var/www/html/';
+$sleepertimesec = '10';
+$looprunok = TRUE;
+while ($looprunok) {
+    exec('/usr/local/bin/showcontacts');
+    $file_contacts = explode(PHP_EOL, file_get_contents($dir.'contacts.txt'));
+    $file_registrations = explode(PHP_EOL, file_get_contents($dir.'registrations.txt'));
+    $list_contacts = array();
+    $list_registrations = array();
+    for ($i = 0; $i < count($file_contacts); $i++) {
+        for ($j = 0; $j < 11; $j++) {
+            $file_contacts[$i] = str_replace('  ', ' ', $file_contacts[$i]);
+        }
+        $file_contacts[$i] = explode(' ', $file_contacts[$i]);
+        if (count($file_contacts[$i]) > 3) {
+            $tmpx = explode('/',$file_contacts[$i][2]);
+            if (substr($tmpx[0], 0,3) == '259') {
+                $list_contacts[count($list_contacts)] = $tmpx[0];
+            }
+        }
+    }
+    for ($i = 0; $i < count($file_registrations); $i++) {
+        for ($j = 0; $j < 11; $j++) {
+            $file_registrations[$i] = str_replace('  ', ' ', $file_registrations[$i]);
+        }
+        $file_registrations[$i] = explode(' ', $file_registrations[$i]);
+        if (count($file_registrations[$i]) > 3) {
+            $tmpx = explode('/',$file_registrations[$i][2]);
+            if (substr($tmpx[0], 0,3) == '259') {
+                $list_registrations[count($list_registrations)] = $tmpx[0];
+            }
+        }
+    }
+    $list_contacts = array_filter($list_contacts);
+    $list_registrations = array_filter($list_registrations);
+    if (count($list_contacts) > 0 || count($list_registrations) > 0) {
+        $counter = 'NO';
+        if (count($list_contacts) == count($list_registrations)) { $counter = 'OK'; }
+        if($list_contacts.sort().join(',') === $list_registrations.sort().join(',') && $counter == 'OK'){
+            //All Done
+        }else{
+            $result1 = array_diff($list_contacts, $list_registrations);
+            $result2 = array_diff($list_registrations, $list_contacts);
+            foreach ($result1 as $regnum) { DwebRTC_DBsql("call greydot_realtime_v2.sp_registration_add('".$regnum."');"); }
+            foreach ($result2 as $remnum) { DwebRTC_DBsql("call greydot_realtime_v2.sp_registration_remove('".$remnum."');"); }
+        }
+    }
+    sleep($sleepertimesec);
+}
 
-$ga = new PHPGangsta_GoogleAuthenticator();
-$secret = $ga->createSecret();
 
-$qrCodeUrl = $ga->getQRCodeGoogleUrl('WWWCall.me', $secret);
+System_Daemon::log(System_Daemon::LOG_INFO, " ====Stoped==== ");
+System_Daemon::stop();
 
-// $oneCode = $ga->getCode($secret);
-// echo "Checking Code '$oneCode' and Secret '$secret':\n";
-
-// $checkResult = $ga->verifyCode($secret, $oneCode, 2);    // 2 = 2*30sec clock tolerance
-// if ($checkResult) {
-//     echo 'OK';
-// } else {
-//     echo 'FAILED';
-// }
+echo DwebRTC_DBsql("sp_regist('user", '1234');
 ?>
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Browser Phone</title>
-        <meta name="description" content="Browser Phone is a fully featured browser based WebRTC SIP phone for Asterisk. Designed to work with Asterisk PBX. It will connect to Asterisk PBX via web socket, and register an extension.  Calls are made between contacts, and a full call detail is saved. Audio and Video Calls can be recorded locally.">
-
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
-        <meta name="HandheldFriendly" content="true">
-
-        <meta name="format-detection" content="telephone=no"/>
-        <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE"/>
-        <meta name="apple-mobile-web-app-capabale" content="yes"/>
-        
-        <meta http-equiv="Pragma" content="no-cache"/>
-        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-        <meta http-equiv="Expires" content="0"/>
-
-        <link rel="icon" href="favicon.ico">
-
-        <link rel="stylesheet" type="text/css" href="https://dtd6jl0d42sve.cloudfront.net/lib/Normalize/normalize-v8.0.1.css"/>
-        <link rel="stylesheet" type="text/css" href="https://dtd6jl0d42sve.cloudfront.net/lib/fonts/font_roboto/roboto.css"/>
-        <link rel="stylesheet" type="text/css" href="https://dtd6jl0d42sve.cloudfront.net/lib/fonts/font_awesome/css/font-awesome.min.css"/>
-        <link rel="stylesheet" type="text/css" href="https://dtd6jl0d42sve.cloudfront.net/lib/jquery/jquery-ui.min.css"/>
-        <link rel="stylesheet" type="text/css" href="https://dtd6jl0d42sve.cloudfront.net/lib/Croppie/Croppie-2.6.4/croppie.css"/>
-        <link rel="stylesheet" type="text/css" href="phone.css"/>
-
-        <script type="text/javascript" src="https://dtd6jl0d42sve.cloudfront.net/lib/jquery/jquery-3.3.1.min.js"></script>
-        <script type="text/javascript" src="https://dtd6jl0d42sve.cloudfront.net/lib/jquery/jquery.md5-min.js"></script>
-        <script type="text/javascript" src="https://dtd6jl0d42sve.cloudfront.net/lib/jquery/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="https://dtd6jl0d42sve.cloudfront.net/lib/Chart/Chart.bundle-2.7.2.js"></script>
-        <script type="text/javascript" src="https://dtd6jl0d42sve.cloudfront.net/lib/SipJS/sip-0.20.0.min.js"></script>
-        <script type="text/javascript" src="https://dtd6jl0d42sve.cloudfront.net/lib/FabricJS/fabric-2.4.6.min.js"></script>
-        <script type="text/javascript" src="https://dtd6jl0d42sve.cloudfront.net/lib/Moment/moment-with-locales-2.24.0.min.js"></script>
-        <script type="text/javascript" src="https://dtd6jl0d42sve.cloudfront.net/lib/Croppie/Croppie-2.6.4/croppie.min.js"></script>
-        <script type="text/javascript" src="https://dtd6jl0d42sve.cloudfront.net/lib/XMPP/strophe-1.4.1.umd.min.js"></script>
-    </head>
-
-    <body>
-        <div id="actionArea" style class="contaceArea cleanScroller">
-            <img src=<?php echo $qrCodeUrl; ?> />
-            <input id="SecretCode" class="UiInputText" type="number"/>
-            <div class="UIWindowButtonBar" id="ButtonBar">
-                <button>Check</button>
-            </div>
-        </div>
-    </body>
-</html>
-

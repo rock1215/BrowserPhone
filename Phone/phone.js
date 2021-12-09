@@ -16009,7 +16009,7 @@ function ShowLogin(loginType) {
   html += "<div class=UiText>Account</div>";
 
   html +=
-    "<div><input id='email' class=UiInputText type=email placeholder='Email' value=''></div>";
+    "<div><input id='email' class=UiInputText type=text placeholder='Account' value=''></div>";
 
   html += "<div class=UiText>Password</div>";
 
