@@ -15991,6 +15991,8 @@ function ShowLogin(obj) {
 
   html += "<div border=0 class=UiSideField>";
 
+  html += "<div class=UiText><h1>Login</h1></div>";
+
   html += "<div class=UiText>Account</div>";
 
   html +=
@@ -16004,6 +16006,8 @@ function ShowLogin(obj) {
   html += "</div>";
 
   html += "<div class=UiWindowButtonBar id=ButtonBar></div>";
+
+  html += "<div class=UiText><h3>Do you have already Account?</h3></div>";
 
   $("#actionArea").html(html);
 
