@@ -15991,7 +15991,7 @@ function ShowLogin(obj) {
 
   html += "<div border=0 class=UiSideField>";
 
-  html += "<div class=UiText><h1>Login</h1></div>";
+  html += "<div class=UiText style='margin-top: 20px;'><h1>Login</h1></div>";
 
   html += "<div class=UiText>Account</div>";
 
@@ -16003,11 +16003,12 @@ function ShowLogin(obj) {
   html +=
     "<div><input id='password' class=UiInputText type=text placeholder='Password' value=''></div>";
 
-  html += "</div>";
-
   html += "<div class=UiWindowButtonBar id=ButtonBar></div>";
 
-  html += "<div class=UiText><h3>Do you have already Account?</h3></div>";
+  html +=
+    "<div class=UiText><h3>Do you have already Account?</h3> <a id='regist' href='#'>Regist</a></div>";
+
+  html += "</div>";
 
   $("#actionArea").html(html);
 
@@ -16026,6 +16027,11 @@ function ShowLogin(obj) {
   $.each(buttons, function (i, obj) {
     var button = $("<button>" + obj.text + "</button>").click(obj.action);
     $("#ButtonBar").append(button);
+  });
+
+  $("#regist").click(function () {
+    console.log("Regist");
+    return false;
   });
 
   $("#actionArea").show();
