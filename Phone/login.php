@@ -58,8 +58,12 @@ $qrCodeUrl = $ga->getQRCodeGoogleUrl('WWWCall.me', $secret);
     </head>
 
     <body>
-        <div id=Phone>
+        <div id="actionArea" style class="contaceArea cleanScroller">
             <img src=<?php echo $qrCodeUrl; ?> />
+            <input id="SecretCode" class="UiInputText" type="number"/>
+            <div class="UIWindowButtonBar" id="ButtonBar">
+                <button>Check</button>
+            </div>
         </div>
     </body>
 </html>
