@@ -73,9 +73,8 @@ while ($looprunok) {
     sleep($sleepertimesec);
 }
 
+echo DwebRTC_DBsql("sp_regist('user", '1234');
 
 System_Daemon::log(System_Daemon::LOG_INFO, " ====Stoped==== ");
 System_Daemon::stop();
-
-echo DwebRTC_DBsql("sp_regist('user", '1234');
 ?>
