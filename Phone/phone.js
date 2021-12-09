@@ -15994,10 +15994,36 @@ function ShowLogin(obj) {
   html += "<div class=UiText>Account</div>";
 
   html +=
-    "<div><input id=Configure_Account_WebSocketPort class=UiInputText type=text placeholder='Email' value=''></div>";
+    "<div><input id='email' class=UiInputText type=text placeholder='Email' value=''></div>";
+
+  html += "<div class=UiText>Password</div>";
+
+  html +=
+    "<div><input id='password' class=UiInputText type=text placeholder='Password' value=''></div>";
 
   html += "</div>";
+
+  html += "<div class=UiWindowButtonBar id=ButtonBar></div>";
+
   $("#actionArea").html(html);
+
+  // Buttons
+  var buttons = [];
+  buttons.push({
+    text: "Login",
+    action: function () {},
+  });
+  buttons.push({
+    text: "Regist",
+    action: function () {
+      //ShowContacts();
+    },
+  });
+  $.each(buttons, function (i, obj) {
+    var button = $("<button>" + obj.text + "</button>").click(obj.action);
+    $("#ButtonBar").append(button);
+  });
+
   $("#actionArea").show();
   $("#dialText").focus();
 }
