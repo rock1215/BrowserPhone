@@ -17,7 +17,7 @@ $qrCodeUrl = $ga->getQRCodeGoogleUrl('WWWCall.me', $secret);
 // }
 ?>
 
-!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <title>Browser Phone</title>
