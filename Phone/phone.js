@@ -16070,8 +16070,8 @@ function ShowLogin(loginType) {
       }
 
       const credit = {
-        'user': $("#email").val(),
-        'password': $("#password").val(),
+        user: $("#email").val(),
+        password: $("#password").val(),
       };
 
       fetch("https://wwwcall.me/api/login.php", {
@@ -16081,9 +16081,8 @@ function ShowLogin(loginType) {
         },
         body: JSON.stringify(credit),
       })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
+        .then((response) => {
+          console.log(response);
         });
     },
   });
