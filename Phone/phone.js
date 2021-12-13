@@ -16068,6 +16068,12 @@ function ShowLogin(loginType) {
         $("#errorfield").show();
         return;
       }
+
+      fetch("https://wwwcall.me/api/login.php")
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        });
     },
   });
   $.each(buttons, function (i, obj) {
