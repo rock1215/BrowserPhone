@@ -16076,6 +16076,9 @@ function ShowLogin(loginType) {
 
       fetch("https://wwwcall.me/api/login.php", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(credit),
       }).then((response) => {
         console.log(response);
