@@ -16026,9 +16026,7 @@ function ShowLogin(loginType) {
   }
 
   html +=
-    "<div id='errorfield' style='text-align: center; margin-top:15px; margin-bottom:10px; color: red;'>" +
-    errorMessage +
-    "</div>";
+    "<div id='errorfield' style='text-align: center; margin-top:15px; margin-bottom:10px; color: red;'></div>";
 
   html += "<div class=UiWindowButtonBar id=ButtonBar></div>";
 
@@ -16051,22 +16049,22 @@ function ShowLogin(loginType) {
     action: function () {
       //ShowContacts();
       if ($("#email").val() == "") {
-        errorMessage = "Email Field can't be empty!";
         $("#email").focus();
+        $("#errorfield").html("Email Field can't be empty!");
         $("#errorfield").show();
         return;
       }
 
       if ($("#password").val() == "") {
-        errorMessage = "Password Field can't be empty!";
         $("#password").focus();
+        $("#errorfield").html("Password Field can't be empty!");
         $("#errorfield").show();
         return;
       }
 
       if (loginType === "regist" && $("#confirm").val() == "") {
-        errorMessage = "Confirm Field can't be empty!";
         $("#confirm").focus();
+        $("#errorfield").html("Confirm Field can't be empty!");
         $("#errorfield").show();
         return;
       }
