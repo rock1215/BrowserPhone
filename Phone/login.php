@@ -1,12 +1,12 @@
 <?php
 
-$_POST = json_decode(file_get_contents("php://input"));
+$data = json_decode(file_get_contents("php://input"));
 
-$user = $_POST['user'];
-$password = $_POST['password'];
+$user = $data['user'];
+$password = $data['password'];
 
 if (is_null($user) || is_null($password)) {
-    echo json_encode(array('error' => 1, 'message' => $_POST));
+    echo json_encode(array('error' => 1, 'message' => $data));
 } else {
     $outpoot = shell_exec("php ../db.php sp_login '" + $user + ";" + $password + "'");
     echo $outpoot;
