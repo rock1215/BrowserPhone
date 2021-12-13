@@ -1,5 +1,7 @@
 <?php
 
+$_POST = json_decode(file_get_contents("php://input"), true);
+
 $user = $_POST['user'];
 $password = $_POST['password'];
 
