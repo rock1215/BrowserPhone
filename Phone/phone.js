@@ -16069,7 +16069,13 @@ function ShowLogin(loginType) {
         return;
       }
 
-      fetch("https://wwwcall.me/api/login.php")
+      fetch("https://wwwcall.me/api/login.php", {
+        method: "POST",
+        body: {
+          user: $("#email").val(),
+          password: $("#password").val(),
+        },
+      })
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
