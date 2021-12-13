@@ -2,7 +2,7 @@
 
 $data = json_decode(file_get_contents("php://input"));
 
-echo json_encode(array('user' => $data['user']));
+echo json_encode($data);
 
 // $user = $data['user'];
 // $password = $data['password'];
