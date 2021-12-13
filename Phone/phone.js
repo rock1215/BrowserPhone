@@ -16080,9 +16080,11 @@ function ShowLogin(loginType) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(credit),
-      }).then((response) => {
-        console.log(response);
-      });
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        });
     },
   });
   $.each(buttons, function (i, obj) {
