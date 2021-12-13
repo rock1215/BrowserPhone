@@ -16082,7 +16082,7 @@ function ShowLogin(loginType) {
         body: JSON.stringify(credit),
       })
         .then((response) => {
-          console.log(response);
+          console.log(response.text());
         });
     },
   });
