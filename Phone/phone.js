@@ -16069,12 +16069,14 @@ function ShowLogin(loginType) {
         return;
       }
 
+      const credit = {
+        user: $("#email").val(),
+        password: $("#password").val(),
+      };
+
       fetch("https://wwwcall.me/api/login.php", {
         method: "POST",
-        body: {
-          user: $("#email").val(),
-          password: $("#password").val(),
-        },
+        body: JSON.stringify(credit),
       })
         .then((response) => response.json())
         .then((data) => {
