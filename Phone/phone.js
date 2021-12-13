@@ -15991,6 +15991,8 @@ function ShowLogin(loginType) {
   var text = "Already Sign Up?";
   var link = "Login";
 
+  var errorMessage = "";
+
   if (loginType === "login") {
     title = "Login";
     buttonName = "Login";
@@ -16023,6 +16025,11 @@ function ShowLogin(loginType) {
       "<div><input id='confirm' class=UiInputText type=password placeholder='Confirm' value=''></div>";
   }
 
+  html +=
+    "<div id='errorfield' style='text-align: center; margin-top:15px; margin-bottom:10px; color: red;'>" +
+    errorMessage +
+    "</div>";
+
   html += "<div class=UiWindowButtonBar id=ButtonBar></div>";
 
   html +=
@@ -16043,6 +16050,26 @@ function ShowLogin(loginType) {
     text: buttonName,
     action: function () {
       //ShowContacts();
+      if ($("#email").val() == "") {
+        errorMessage = "Email Field can't be empty!";
+        $("#email").focus();
+        $("#errorfield").show();
+        return;
+      }
+
+      if ($("#password").val() == "") {
+        errorMessage = "Password Field can't be empty!";
+        $("#password").focus();
+        $("#errorfield").show();
+        return;
+      }
+
+      if (loginType === "regist" && $("#confirm").val() == "") {
+        errorMessage = "Confirm Field can't be empty!";
+        $("#confirm").focus();
+        $("#errorfield").show();
+        return;
+      }
     },
   });
   $.each(buttons, function (i, obj) {
@@ -16061,4 +16088,5 @@ function ShowLogin(loginType) {
 
   $("#actionArea").show();
   $("#dialText").focus();
+  $("#errorfield").hide();
 }
