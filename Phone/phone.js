@@ -16081,8 +16081,9 @@ function ShowLogin(loginType) {
         },
         body: JSON.stringify(credit),
       })
-        .then((response) => {
-          console.log(response.text());
+        .then((response) => response.json())
+        .then(data => {
+          console.log(data);
         });
     },
   });
