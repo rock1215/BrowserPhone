@@ -16023,6 +16023,11 @@ function ShowLogin(loginType) {
 
     html +=
       "<div><input id='confirm' class=UiInputText type=password placeholder='Confirm' value=''></div>";
+
+    html += "<div class=UiText>PinCode</div>";
+
+    html +=
+      "<div><input id='pincode' class=UiInputText type=text pattern='d*' maxlength=5 placeholder='PinCode' value=''></div>";
   }
 
   html +=
@@ -16062,19 +16067,41 @@ function ShowLogin(loginType) {
         return;
       }
 
-      if (loginType === "regist" && $("#confirm").val() == "") {
-        $("#confirm").focus();
-        $("#errorfield").html("Confirm Field can't be empty!");
-        $("#errorfield").show();
-        return;
+      if (loginType === "regist") {
+        if ($("#confirm").val() == "") {
+          $("#confirm").focus();
+          $("#errorfield").html("Confirm Field can't be empty!");
+          $("#errorfield").show();
+          return;
+        }
+        if ($("#confirm").val() !== $("#password").val()) {
+          $("#confirm").focus();
+          $("#errorfield").html("Password doesn't match");
+          $("#errorfield").show();
+          return;
+        }
+        if ($("#pincode").val() == "") {
+          $("#pincode").focus();
+          $("#errorfield").html("Pincode Field can't be empty!");
+          $("#errorfield").show();
+          return;
+        }
+        if ($("#pincode").val().length != 5) {
+          $("#pincode").focus();
+          $("#errorfield").html("Pincode must be 5 numbers");
+          $("#errorfield").show();
+          return;
+        }
       }
 
       const credit = {
         user: $("#email").val(),
         password: $("#password").val(),
+        type: loginType,
+        pincode: loginType === "login" ? "" : $("#pincode").val(),
       };
 
-      fetch("https://wwwcall.me/api/login.php", {
+      fetch("https://wwwcall.me/api/account.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -16082,7 +16109,7 @@ function ShowLogin(loginType) {
         body: JSON.stringify(credit),
       })
         .then((response) => response.json())
-        .then(data => {
+        .then((data) => {
           console.log(data);
         });
     },
