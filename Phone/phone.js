@@ -16269,7 +16269,7 @@ function setData(data) {
 
   localDB.setItem("ChatEngine", "SIMPLE");
 
-  ShowMyProfile();
+  //ShowMyProfile();
 }
 
 function LogOut() {
