@@ -16223,12 +16223,14 @@ function showVerify(data) {
         $("#errorfield").show();
         return;
       }
-      if ($("#pincode").val() !== "12345") {
+      if ($("#pincode").val() !== data.PIN) {
         $("#pincode").focus();
-        $("#errorfield").html("Pincode Field can't be empty!");
+        $("#errorfield").html("Pincode doesn't match");
         $("#errorfield").show();
         return;
       }
+
+      setData(data);
     },
   });
   $.each(buttons, function (i, obj) {
