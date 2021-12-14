@@ -1291,8 +1291,8 @@ function InitUi() {
 
   // Check if you account is created
   if (profileUserID == null || profileUserID === "") {
-    //ShowLogin("login");
-    ShowMyProfile();
+    ShowLogin("login");
+    //ShowMyProfile();
     return; // Don't load any more, after applying settings, the page must reload.
   }
 
