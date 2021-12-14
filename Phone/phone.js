@@ -1174,6 +1174,7 @@ $(document).ready(function () {
 // Init UI
 // =======
 function InitUi() {
+  console.log(profileUserID);
   var phone = $("#Phone");
   phone.empty();
   phone.attr("class", "pageContainer");
@@ -1289,7 +1290,7 @@ function InitUi() {
   UpdateUI();
 
   // Check if you account is created
-  if (profileUserID == null) {
+  if (profileUserID == "") {
     ShowLogin("login");
     return; // Don't load any more, after applying settings, the page must reload.
   }
@@ -16267,7 +16268,7 @@ function setData(data) {
 }
 
 function LogOut() {
-  localDB.setItem("profileUserID", null); // For first time only
+  localDB.setItem("profileUserID", ""); // For first time only
   localDB.setItem("wssServer", "");
   localDB.setItem("WebSocketPort", "");
   localDB.setItem("ServerPath", "");
