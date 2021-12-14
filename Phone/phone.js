@@ -16138,7 +16138,25 @@ function ShowLogin(loginType) {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          if (data.error === 0) {
+            const result = data.data;
+            if (result.response_code === "1") {
+              if (loginType === "login") {
+                showVerify(result);
+              } else {
+                setData(result);
+              }
+            } else {
+              $("#errorfield").html(result.response_code_message);
+              $("#errorfield").show();
+            }
+          } else if (data.error === 1) {
+            $("#errorfield").html(data.message);
+            $("#errorfield").show();
+          } else {
+            $("#errorfield").html("Unexpected Error!");
+            $("#errorfield").show();
+          }
         });
     },
   });
@@ -16160,3 +16178,59 @@ function ShowLogin(loginType) {
   $("#dialText").focus();
   $("#errorfield").hide();
 }
+
+function showVerify(data) {
+  $("#myContacts").hide();
+  $("#actionArea").empty();
+
+  var html =
+    '<div style="text-align:right; display:none;"><button onclick="ShowContacts()"><i class="fa fa-close"></i></button></div>';
+
+  html += "<div border=0 class=UiSideField>";
+
+  html +=
+    "<div class=UiText style='margin-top: 20px;'><h1>Verify Pincode</h1></div>";
+
+  html += "<div class=UiText>Pincode</div>";
+
+  html +=
+    "<div><input id='pincode' class=UiInputText type=text value=''></div>";
+
+  html += "<div class=UiWindowButtonBar id=ButtonBar></div>";
+
+  html +=
+    "<div class=UiText><span>Forgot Pincode?<a id='reset' style='color: white; margin-left: 10px;' href='#'>Reset Pincode</a></span></div>";
+
+  html += "</div>";
+
+  $("#actionArea").html(html);
+
+  // Buttons
+  var buttons = [];
+
+  buttons.push({
+    text: "Verify",
+    action: function () {
+      // Add Here
+    },
+  });
+  $.each(buttons, function (i, obj) {
+    var button = $("<button>" + obj.text + "</button>").click(obj.action);
+    $("#ButtonBar").append(button);
+  });
+
+  $("#reset").click(function () {
+    return false;
+  });
+
+  $("#actionArea").show();
+  $("#errorfield").hide();
+  $("#pincode").pincodeInput({
+    inputs: 5,
+    complete: function (text) {
+      alert("Your code is " + text);
+    },
+  });
+}
+
+function setData(data) {}
