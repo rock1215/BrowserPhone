@@ -20,7 +20,17 @@ if (is_null($user)) {
         $result = json_decode($outpoot);
 
         echo json_encode(array('error' => 0, 'data' => $result[0]));
-    }    
+    } else if ($type === "pinset") {
+        $outpoot = shell_exec("php ../db.php sp_pin_set '".$user.";".$pincode."'");
+        $result = json_decode($outpoot);
+
+        echo json_encode(array('error' => 0, 'data' => $result[0]));
+    } else {
+        $outpoot = shell_exec("php ../db.php sp_pin_reset '".$user."'");
+        $result = json_decode($outpoot);
+
+        echo json_encode(array('error' => 0, 'data' => $result[0]));
+    }
 }
 
 ?>
