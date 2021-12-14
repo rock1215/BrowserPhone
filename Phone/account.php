@@ -13,7 +13,7 @@ if (is_null($user) || is_null($password)) {
     $outpoot = shell_exec("php ../db.php sp_login '".$user.";".$password."'");
     $result = json_decode($outpoot);
 
-    echo json_encode(array('error' => 0, 'data' => $result));
+    echo json_encode(array('error' => 0, 'data' => $result[0]));
 }
 
 ?>
