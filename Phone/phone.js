@@ -16194,7 +16194,7 @@ function showVerify(data) {
   html += "<div class=UiText>Pincode</div>";
 
   html +=
-    "<div style='width:100px'><input id='pincode-input' type=text value=''></div>";
+    "<div style='width:160px'><input id='pincode-input' type=text value=''></div>";
 
   html += "<div class=UiWindowButtonBar id=ButtonBar></div>";
 
