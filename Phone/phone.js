@@ -16175,7 +16175,7 @@ function ShowLogin(loginType) {
   });
 
   $("#actionArea").show();
-  $("#dialText").focus();
+  $("#email").focus();
   $("#errorfield").hide();
 }
 
@@ -16194,7 +16194,10 @@ function showVerify(data) {
   html += "<div class=UiText>Pincode</div>";
 
   html +=
-    "<div style='width:200px'><input id='pincode-input' type=text value=''></div>";
+    "<div><input id='pincode' class=UiInputText type=number pattern=\"/^-?d+.?d*$/\" onKeyPress=\"if(this.value.length==5) return false;\" placeholder='PinCode' ></div>";
+
+  html +=
+    "<div id='errorfield' style='text-align: center; margin-top:15px; margin-bottom:10px; color: red;'></div>";
 
   html += "<div class=UiWindowButtonBar id=ButtonBar></div>";
 
@@ -16224,13 +16227,8 @@ function showVerify(data) {
   });
 
   $("#actionArea").show();
+  $("#pincode").focus();
   $("#errorfield").hide();
-  $("#pincode-input").pincodeInput({
-    inputs: 6,
-    complete: function (text) {
-      alert("Your code is " + text);
-    },
-  });
 }
 
 function setData(data) {}
