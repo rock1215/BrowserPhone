@@ -16186,7 +16186,7 @@ function showVerify(data) {
   var html =
     '<div style="text-align:right; display:none;"><button onclick="ShowContacts()"><i class="fa fa-close"></i></button></div>';
 
-  html += "<div border=0 class=UiSideField>";
+  html += "<div border=0 >";
 
   html +=
     "<div class=UiText style='margin-top: 20px;'><h1>Verify Pincode</h1></div>";
@@ -16194,7 +16194,7 @@ function showVerify(data) {
   html += "<div class=UiText>Pincode</div>";
 
   html +=
-    "<div style='width:160px'><input id='pincode-input' type=text value=''></div>";
+    "<div style='width:200px'><input id='pincode-input' type=text value=''></div>";
 
   html += "<div class=UiWindowButtonBar id=ButtonBar></div>";
 
