@@ -16230,6 +16230,8 @@ function showVerify(data) {
         return;
       }
 
+      $("#errorfield").hide();
+
       setData(data);
     },
   });
@@ -16247,4 +16249,17 @@ function showVerify(data) {
   $("#errorfield").hide();
 }
 
-function setData(data) {}
+function setData(data) {
+  // 1 Account
+  if (localDB.getItem("profileUserID") == null)
+    localDB.setItem("profileUserID", uID()); // For first time only
+  localDB.setItem("wssServer", $("#Configure_Account_wssServer").val());
+  localDB.setItem("WebSocketPort", $("#Configure_Account_WebSocketPort").val());
+  localDB.setItem("ServerPath", $("#Configure_Account_ServerPath").val());
+  localDB.setItem("profileUser", $("#Configure_Account_profileUser").val());
+  localDB.setItem("profileName", $("#Configure_Account_profileName").val());
+  localDB.setItem("SipUsername", $("#Configure_Account_SipUsername").val());
+  localDB.setItem("SipPassword", $("#Configure_Account_SipPassword").val());
+
+  localDB.setItem("ChatEngine", chatEng);
+}
