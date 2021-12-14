@@ -16269,6 +16269,7 @@ function setData(data) {
 
   localDB.setItem("ChatEngine", "SIMPLE");
 
+  window.location.reload();
   //ShowMyProfile();
 }
 
