@@ -1550,7 +1550,7 @@ function CreateUserAgent() {
     userAgentString: userAgentStr,
     autostart: false,
     register: false,
-    rel100: SIP.C.supported.UNSUPPORTED, // UNSUPPORTED | SUPPORTED | REQUIRED NOTE: rel100 is not supported
+    rel100: "UNSUPPORTED", //SIP.C.supported.UNSUPPORTED, // UNSUPPORTED | SUPPORTED | REQUIRED NOTE: rel100 is not supported
   };
   if (IceStunServerJson != "") {
     options.sessionDescriptionHandlerFactoryOptions.peerConnectionOptions.rtcConfiguration.iceServers =
