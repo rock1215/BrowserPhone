@@ -215,6 +215,28 @@ let lang = {};
 let audioBlobs = {};
 let newLineNumber = 0;
 
+// INPUTFILTER
+
+(function ($) {
+  $.fn.inputFilter = function (inputFilter) {
+    return this.on(
+      "input keydown keyup mousedown mouseup select contextmenu drop",
+      function () {
+        if (inputFilter(this.value)) {
+          this.oldValue = this.value;
+          this.oldSelectionStart = this.selectionStart;
+          this.oldSelectionEnd = this.selectionEnd;
+        } else if (this.hasOwnProperty("oldValue")) {
+          this.value = this.oldValue;
+          this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+        } else {
+          this.value = "";
+        }
+      }
+    );
+  };
+})(jQuery);
+
 // Utilities
 // =========
 function uID() {
@@ -16027,7 +16049,11 @@ function ShowLogin(loginType) {
     html += "<div class=UiText>PinCode</div>";
 
     html +=
-      "<div><input id='pincode' class=UiInputText type=number pattern='d*' maxlength=5 placeholder='PinCode' ></div>";
+      "<div><input id='pincode' class=UiInputText type=text maxlength=5 placeholder='PinCode' ></div>";
+
+    $("#pincode").inputFilter(function (value) {
+      return /^-?\d*$/.test(value);
+    });
   }
 
   html +=
