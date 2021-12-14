@@ -16019,8 +16019,6 @@ function ShowLogin(loginType) {
   var text = "Already Sign Up?";
   var link = "Login";
 
-  var errorMessage = "";
-
   if (loginType === "login") {
     title = "Login";
     buttonName = "Login";
@@ -16254,13 +16252,15 @@ function setData(data) {
   // 1 Account
   if (localDB.getItem("profileUserID") == null)
     localDB.setItem("profileUserID", uID()); // For first time only
-  localDB.setItem("wssServer", $("#Configure_Account_wssServer").val());
-  localDB.setItem("WebSocketPort", $("#Configure_Account_WebSocketPort").val());
-  localDB.setItem("ServerPath", $("#Configure_Account_ServerPath").val());
-  localDB.setItem("profileUser", $("#Configure_Account_profileUser").val());
-  localDB.setItem("profileName", $("#Configure_Account_profileName").val());
-  localDB.setItem("SipUsername", $("#Configure_Account_SipUsername").val());
-  localDB.setItem("SipPassword", $("#Configure_Account_SipPassword").val());
+  localDB.setItem("wssServer", data.socker_server);
+  localDB.setItem("WebSocketPort", data.port);
+  localDB.setItem("ServerPath", data.path);
+  localDB.setItem("profileUser", data.extension);
+  localDB.setItem("profileName", data.email);
+  localDB.setItem("SipUsername", data.sip_account);
+  localDB.setItem("SipPassword", data.secret);
 
-  localDB.setItem("ChatEngine", chatEng);
+  localDB.setItem("ChatEngine", "SIMPLE");
+
+  window.location.reload();
 }
