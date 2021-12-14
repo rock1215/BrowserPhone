@@ -1347,7 +1347,7 @@ function ShowMyProfileMenu(obj) {
   });
   items.push({
     icon: "fa fa-wrench",
-    text: lang.configure_extension,
+    text: "logout",
     value: 2,
   });
   items.push({ icon: null, text: "-" });
@@ -1412,7 +1412,8 @@ function ShowMyProfileMenu(obj) {
         RefreshRegistration();
       }
       if (id == "2") {
-        ShowMyProfile();
+        LogOut();
+        //ShowMyProfile();
       }
       if (id == "3") {
         AddSomeoneWindow();
@@ -16259,6 +16260,21 @@ function setData(data) {
   localDB.setItem("profileName", data.email);
   localDB.setItem("SipUsername", data.sip_account);
   localDB.setItem("SipPassword", data.secret);
+
+  localDB.setItem("ChatEngine", "SIMPLE");
+
+  window.location.reload();
+}
+
+function LogOut() {
+  localDB.setItem("profileUserID", null); // For first time only
+  localDB.setItem("wssServer", "");
+  localDB.setItem("WebSocketPort", "");
+  localDB.setItem("ServerPath", "");
+  localDB.setItem("profileUser", "");
+  localDB.setItem("profileName", "");
+  localDB.setItem("SipUsername", "");
+  localDB.setItem("SipPassword", "");
 
   localDB.setItem("ChatEngine", "SIMPLE");
 
