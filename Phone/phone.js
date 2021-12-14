@@ -16027,7 +16027,7 @@ function ShowLogin(loginType) {
     html += "<div class=UiText>PinCode</div>";
 
     html +=
-      "<div><input id='pincode' class=UiInputText type=text pattern='d*' maxlength=5 placeholder='PinCode' value=''></div>";
+      "<div><input id='pincode' class=UiInputText type=text pattern='d*' maxlength=5 placeholder='PinCode' onkeyup='this.value=this.value.replace(/[^d]/,'')' value=''></div>";
   }
 
   html +=
