@@ -16055,11 +16055,7 @@ function ShowLogin(loginType) {
     html += "<div class=UiText>PinCode</div>";
 
     html +=
-      "<div><input id='pincode' class=UiInputText type=text maxlength=5 placeholder='PinCode' ></div>";
-
-    setInputFilter(document.getElementById("pincode"), function (value) {
-      return /^\d*\.?\d*$/.test(value);
-    });
+      "<div><input id='pincode' class=UiInputText type=number pattern=\"/^-?d+.?d*$/\" onKeyPress=\"if(this.value.length==5) return false;\" placeholder='PinCode' ></div>";
   }
 
   html +=
