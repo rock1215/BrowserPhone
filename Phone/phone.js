@@ -1348,12 +1348,12 @@ function ShowMyProfileMenu(obj) {
   });
   items.push({
     icon: "fa fa-wrench",
-    text: "logout",
+    text: lang.configure_extension,
     value: 2,
   });
   items.push({ icon: null, text: "-" });
   items.push({ icon: "fa fa-user-plus", text: lang.add_someone, value: 3 });
-  // items.push({ icon: "fa fa-users", text: lang.create_group, value: 4}); // TODO
+  items.push({ icon: "fa fa-users", text: "Logout", value: 4 }); // TODO
   items.push({ icon: null, text: "-" });
   if (AutoAnswerEnabled == true) {
     items.push({
@@ -1413,14 +1413,15 @@ function ShowMyProfileMenu(obj) {
         RefreshRegistration();
       }
       if (id == "2") {
-        LogOut();
-        //ShowMyProfile();
+        //LogOut();
+        ShowMyProfile();
       }
       if (id == "3") {
         AddSomeoneWindow();
       }
       if (id == "4") {
-        CreateGroupWindow(); // TODO
+        //CreateGroupWindow(); // TODO
+        LogOut();
       }
       if (id == "5") {
         ToggleAutoAnswer();
@@ -16252,7 +16253,10 @@ function showVerify(data) {
 
 function setData(data) {
   // 1 Account
-  if (localDB.getItem("profileUserID") == null)
+  if (
+    localDB.getItem("profileUserID") == null ||
+    localDB.getItem("profileUserID") === ""
+  )
     localDB.setItem("profileUserID", uID()); // For first time only
   localDB.setItem("wssServer", data.socker_server);
   localDB.setItem("WebSocketPort", data.port);
