@@ -215,6 +215,34 @@ let lang = {};
 let audioBlobs = {};
 let newLineNumber = 0;
 
+// SETINPUTFILTER
+
+function setInputFilter(textbox, inputFilter) {
+  [
+    "input",
+    "keydown",
+    "keyup",
+    "mousedown",
+    "mouseup",
+    "select",
+    "contextmenu",
+    "drop",
+  ].forEach(function (event) {
+    textbox.addEventListener(event, function () {
+      if (inputFilter(this.value)) {
+        this.oldValue = this.value;
+        this.oldSelectionStart = this.selectionStart;
+        this.oldSelectionEnd = this.selectionEnd;
+      } else if (this.hasOwnProperty("oldValue")) {
+        this.value = this.oldValue;
+        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+      } else {
+        this.value = "";
+      }
+    });
+  });
+}
+
 // Utilities
 // =========
 function uID() {
@@ -16029,9 +16057,8 @@ function ShowLogin(loginType) {
     html +=
       "<div><input id='pincode' class=UiInputText type=text maxlength=5 placeholder='PinCode' ></div>";
 
-    $("#pincode").inputFilter(function (value) {
-      console.log(value);
-      return /^-?\d*$/.test(value);
+    setInputFilter(document.getElementById("pincode"), function (value) {
+      return /^\d*\.?\d*$/.test(value);
     });
   }
 
@@ -16136,29 +16163,4 @@ function ShowLogin(loginType) {
   $("#actionArea").show();
   $("#dialText").focus();
   $("#errorfield").hide();
-
-  // INPUTFILTER
-
-  (function ($) {
-    $.fn.inputFilter = function (inputFilter) {
-      return this.on(
-        "input keydown keyup mousedown mouseup select contextmenu drop",
-        function () {
-          if (inputFilter(this.value)) {
-            this.oldValue = this.value;
-            this.oldSelectionStart = this.selectionStart;
-            this.oldSelectionEnd = this.selectionEnd;
-          } else if (this.hasOwnProperty("oldValue")) {
-            this.value = this.oldValue;
-            this.setSelectionRange(
-              this.oldSelectionStart,
-              this.oldSelectionEnd
-            );
-          } else {
-            this.value = "";
-          }
-        }
-      );
-    };
-  })(jQuery);
 }
