@@ -16139,7 +16139,8 @@ function ShowLogin(loginType) {
         .then((response) => response.json())
         .then((data) => {
           if (data.error === 0) {
-            const result = data.data;
+            let result = data.data;
+            result.email = $("#email").val();
             if (result.response_code === "1") {
               if (loginType === "login") {
                 showVerify(result);
