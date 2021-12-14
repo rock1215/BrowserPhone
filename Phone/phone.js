@@ -16194,7 +16194,7 @@ function showVerify(data) {
   html += "<div class=UiText>Pincode</div>";
 
   html +=
-    "<div><input id='pincode' class=UiInputText type=text value=''></div>";
+    "<div><input id='pincode-input' class=UiInputText type=text value=''></div>";
 
   html += "<div class=UiWindowButtonBar id=ButtonBar></div>";
 
@@ -16225,7 +16225,7 @@ function showVerify(data) {
 
   $("#actionArea").show();
   $("#errorfield").hide();
-  $("#pincode").pincodeInput({
+  $("#pincode-input").pincodeInput({
     inputs: 5,
     complete: function (text) {
       alert("Your code is " + text);
