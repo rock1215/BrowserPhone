@@ -16183,6 +16183,8 @@ function showVerify(data) {
   $("#myContacts").hide();
   $("#actionArea").empty();
 
+  console.log(data);
+
   var html =
     '<div style="text-align:right; display:none;"><button onclick="ShowContacts()"><i class="fa fa-close"></i></button></div>';
 
@@ -16215,6 +16217,18 @@ function showVerify(data) {
     text: "Verify",
     action: function () {
       // Add Here
+      if ($("#pincode").val() == "") {
+        $("#pincode").focus();
+        $("#errorfield").html("Pincode Field can't be empty!");
+        $("#errorfield").show();
+        return;
+      }
+      if ($("#pincode").val() !== "12345") {
+        $("#pincode").focus();
+        $("#errorfield").html("Pincode Field can't be empty!");
+        $("#errorfield").show();
+        return;
+      }
     },
   });
   $.each(buttons, function (i, obj) {
