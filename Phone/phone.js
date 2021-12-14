@@ -16186,7 +16186,7 @@ function showVerify(data) {
   var html =
     '<div style="text-align:right; display:none;"><button onclick="ShowContacts()"><i class="fa fa-close"></i></button></div>';
 
-  html += "<div border=0 >";
+  html += "<div border=0 class=UiSideField>";
 
   html +=
     "<div class=UiText style='margin-top: 20px;'><h1>Verify Pincode</h1></div>";
@@ -16226,7 +16226,7 @@ function showVerify(data) {
   $("#actionArea").show();
   $("#errorfield").hide();
   $("#pincode-input").pincodeInput({
-    inputs: 5,
+    inputs: 6,
     complete: function (text) {
       alert("Your code is " + text);
     },
