@@ -16026,7 +16026,7 @@ function ShowLogin(loginType) {
 
   var title = "Sign-up";
   var buttonName = "Sign-up";
-  var text = "Already Sign Up?";
+  var text = "Already signed Up?";
   var link = "Login";
 
   if (loginType === "login") {
