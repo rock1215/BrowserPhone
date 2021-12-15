@@ -16145,10 +16145,10 @@ function ShowLogin(loginType) {
             result.email = $("#email").val();
             if (result.response_code === "1") {
               if (loginType === "login") {
-                if (data.PIN === "01234") {
-                  showNewPincode(data);
+                if (result.PIN === "01234") {
+                  showNewPincode(result);
                 } else {
-                  showVerify(data);
+                  showVerify(result);
                 }
               } else {
                 setData(result);
