@@ -16,7 +16,7 @@ if (is_null($user)) {
 
         echo json_encode(array('error' => 0, 'data' => $result[0]));
     } else if ($type === "regist") {
-        $outpoot = shell_exec("php ../db.php sp_signup '".$user.";".$password.";".$pincode."'");
+        $outpoot = shell_exec("php ../db.php sp_signup '".$user.";".$password."'");
         $result = json_decode($outpoot);
 
         echo json_encode(array('error' => 0, 'data' => $result[0]));

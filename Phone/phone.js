@@ -11849,7 +11849,7 @@ function ShowMyProfile() {
 
   // SIP Account
   html +=
-    '<div class=UiTextHeading onclick="ToggleHeading(this,\'Configure_Extension_Html\')"><i class="fa fa-user-circle-o UiTextHeadingIcon" style="background-color:#a93a3a"></i> ' +
+    '<div style="display:none" class=UiTextHeading onclick="ToggleHeading(this,\'Configure_Extension_Html\')"><i class="fa fa-user-circle-o UiTextHeadingIcon" style="background-color:#a93a3a"></i> ' +
     lang.account +
     "</div>";
 
@@ -16024,15 +16024,15 @@ function ShowLogin(loginType) {
   $("#myContacts").hide();
   $("#actionArea").empty();
 
-  var title = "Regist";
-  var buttonName = "Regist";
+  var title = "Sign-up";
+  var buttonName = "Sign-up";
   var text = "Already Sign Up?";
   var link = "Login";
 
   if (loginType === "login") {
     title = "Login";
     buttonName = "Login";
-    text = "Do you have already an account?";
+    text = "Don't you have an account?";
     link = "Sign Up";
   }
 
@@ -16060,10 +16060,10 @@ function ShowLogin(loginType) {
     html +=
       "<div><input id='confirm' class=UiInputText type=password placeholder='Confirm' value=''></div>";
 
-    html += "<div class=UiText>PinCode</div>";
+    // html += "<div class=UiText>PinCode</div>";
 
-    html +=
-      "<div><input id='pincode' class=UiInputText type=number pattern=\"/^-?d+.?d*$/\" onKeyPress=\"if(this.value.length==5) return false;\" placeholder='PinCode' ></div>";
+    // html +=
+    //   "<div><input id='pincode' class=UiInputText type=number pattern=\"/^-?d+.?d*$/\" onKeyPress=\"if(this.value.length==5) return false;\" placeholder='PinCode' ></div>";
   }
 
   html +=
@@ -16116,25 +16116,25 @@ function ShowLogin(loginType) {
           $("#errorfield").show();
           return;
         }
-        if ($("#pincode").val() == "") {
-          $("#pincode").focus();
-          $("#errorfield").html("Pincode Field can't be empty!");
-          $("#errorfield").show();
-          return;
-        }
-        if ($("#pincode").val().length != 5) {
-          $("#pincode").focus();
-          $("#errorfield").html("Pincode must be 5 numbers");
-          $("#errorfield").show();
-          return;
-        }
+        // if ($("#pincode").val() == "") {
+        //   $("#pincode").focus();
+        //   $("#errorfield").html("Pincode Field can't be empty!");
+        //   $("#errorfield").show();
+        //   return;
+        // }
+        // if ($("#pincode").val().length != 5) {
+        //   $("#pincode").focus();
+        //   $("#errorfield").html("Pincode must be 5 numbers");
+        //   $("#errorfield").show();
+        //   return;
+        // }
       }
 
       const credit = {
         user: $("#email").val(),
         password: $("#password").val(),
         type: loginType,
-        pincode: loginType === "login" ? "" : $("#pincode").val(),
+        //pincode: loginType === "login" ? "" : $("#pincode").val(),
       };
 
       fetch("https://wwwcall.me/api/account.php", {
@@ -16204,9 +16204,9 @@ function showVerify(data) {
   html += "<div border=0 class=UiSideField>";
 
   html +=
-    "<div class=UiText style='margin-top: 20px;'><h1>Verify Pincode</h1></div>";
+    "<div class=UiText style='margin-top: 20px;'><h1>Verify PIN</h1></div>";
 
-  html += "<div class=UiText>Pincode</div>";
+  html += "<div class=UiText>PIN</div>";
 
   html +=
     "<div id='pincode-container' style='display:flex; flex-direction: row; justify-content: left'></div>";
@@ -16217,7 +16217,7 @@ function showVerify(data) {
   html += "<div class=UiWindowButtonBar id=ButtonBar></div>";
 
   html +=
-    "<div class=UiText><span>Forgot Pincode?<a id='reset' style='color: white; margin-left: 10px;' href='#'>Reset Pincode</a></span></div>";
+    "<div class=UiText><span>Forgot PIN?<a id='reset' style='color: white; margin-left: 10px;' href='#'>Reset PIN</a></span></div>";
 
   html += "</div>";
 
@@ -16234,7 +16234,7 @@ function showVerify(data) {
       for (let i = 0; i < 5; i++) {
         if (!pincodes[i].disabled) {
           if ($(`#${pincodes[i].pinid}`).val() !== data.PIN.charAt(i)) {
-            $("#errorfield").html("Pincode doesn't match");
+            $("#errorfield").html("PIN doesn't match");
             $("#errorfield").show();
             return;
           }
@@ -16355,13 +16355,17 @@ function showNewPincode(logdata) {
 
   html += "<div border=0 class=UiSideField>";
 
-  html +=
-    "<div class=UiText style='margin-top: 20px;'><h1>Set New Pincode</h1></div>";
+  html += "<div class=UiText style='margin-top: 20px;'><h1>Set PIN</h1></div>";
 
-  html += "<div class=UiText>Pincode</div>";
+  html += "<div class=UiText>PIN</div>";
 
   html +=
-    "<div><input id='pincode' class=UiInputText type=number pattern=\"/^-?d+.?d*$/\" onKeyPress=\"if(this.value.length==5) return false;\" placeholder='PinCode' ></div>";
+    "<div><input id='pincode' class=UiInputText type=number pattern=\"/^-?d+.?d*$/\" onKeyPress=\"if(this.value.length==5) return false;\" placeholder='PIN' ></div>";
+
+  html += "<div class=UiText>Confirm</div>";
+
+  html +=
+    "<div><input id='confirm' class=UiInputText type=number pattern=\"/^-?d+.?d*$/\" onKeyPress=\"if(this.value.length==5) return false;\" placeholder='Confirm' ></div>";
 
   html +=
     "<div id='errorfield' style='text-align: center; margin-top:15px; margin-bottom:10px; color: red;'></div>";
@@ -16381,13 +16385,28 @@ function showNewPincode(logdata) {
       // Add Here
       if ($("#pincode").val() == "") {
         $("#pincode").focus();
-        $("#errorfield").html("Pincode Field can't be empty!");
+        $("#errorfield").html("PIN Field can't be empty!");
         $("#errorfield").show();
         return;
       }
+
+      if ($("#confirm").val() == "") {
+        $("#confirm").focus();
+        $("#errorfield").html("Confirm Field can't be empty!");
+        $("#errorfield").show();
+        return;
+      }
+
       if ($("#pincode").val().length != 5) {
         $("#pincode").focus();
-        $("#errorfield").html("Pincode must be 5 numbers");
+        $("#errorfield").html("PIN must be 5 numbers");
+        $("#errorfield").show();
+        return;
+      }
+
+      if ($("#pincode").val() != $("#confirm").val()) {
+        $("#pincode").focus();
+        $("#errorfield").html("PIN doesn't match");
         $("#errorfield").show();
         return;
       }
