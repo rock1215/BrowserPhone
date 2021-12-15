@@ -1353,7 +1353,7 @@ function ShowMyProfileMenu(obj) {
     value: 2,
   });
   items.push({ icon: null, text: "-" });
-  items.push({ icon: "fa fa-user-plus", text: lang.add_someone, value: 3 });
+  //items.push({ icon: "fa fa-user-plus", text: lang.add_someone, value: 3 });
   items.push({ icon: null, text: "-" });
   if (AutoAnswerEnabled == true) {
     items.push({
@@ -1400,9 +1400,9 @@ function ShowMyProfileMenu(obj) {
     });
   }
 
-  items.push({ icon: "fa fa-users", text: "Logout", value: 4 }); // TODO
+  items.push({ icon: "fa fa-users", text: "Reset PIN", value: 10 }); // TODO
 
-  items.push({ icon: "fa fa-users", text: "SetNewPin", value: 10 }); // TODO
+  items.push({ icon: "fa fa-users", text: "Logout", value: 4 }); // TODO
 
   if (ChatEngine == "XMPP") {
     items.push({ icon: null, text: "-" });
