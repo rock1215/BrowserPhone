@@ -16404,7 +16404,22 @@ function showNewPincode(logdata) {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          if (data.error === 0) {
+            let result = data.data;
+            result.email = $("#email").val();
+            if (result.response_code === "1") {
+              setData(logdata);
+            } else {
+              $("#errorfield").html(result.response_code_message);
+              $("#errorfield").show();
+            }
+          } else if (data.error === 1) {
+            $("#errorfield").html(data.message);
+            $("#errorfield").show();
+          } else {
+            $("#errorfield").html("Unexpected Error!");
+            $("#errorfield").show();
+          }
         });
     },
   });
