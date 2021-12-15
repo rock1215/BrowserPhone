@@ -16186,8 +16186,6 @@ function showVerify(data) {
   $("#myContacts").hide();
   $("#actionArea").empty();
 
-  console.log(data);
-
   var html =
     '<div style="text-align:right; display:none;"><button onclick="ShowContacts()"><i class="fa fa-close"></i></button></div>';
 
