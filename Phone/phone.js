@@ -16187,6 +16187,8 @@ function ShowLogin(loginType) {
 }
 
 function showVerify(data) {
+  console.log(data);
+
   $("#myContacts").hide();
   $("#actionArea").empty();
 
@@ -16281,7 +16283,6 @@ function showVerify(data) {
       setTimeout(function () {
         if ($this.val().length >= parseInt($this.attr("maxlength"), 10)) {
           $this.nextAll("input").not(".disabled").first().focus();
-          console.log($this.nextAll("input").not(".disabled").length);
         }
       }, 0);
     });
@@ -16301,8 +16302,6 @@ function showVerify(data) {
       user: data.email,
       type: "pinreset",
     };
-
-    console.log(credit);
 
     fetch("https://wwwcall.me/api/account.php", {
       method: "POST",
