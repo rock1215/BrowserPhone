@@ -16218,17 +16218,15 @@ function showVerify(data) {
     text: "Verify",
     action: function () {
       // Add Here
-      if ($("#pincode").val() == "") {
-        $("#pincode").focus();
-        $("#errorfield").html("Pincode Field can't be empty!");
-        $("#errorfield").show();
-        return;
-      }
-      if ($("#pincode").val() !== data.PIN) {
-        $("#pincode").focus();
-        $("#errorfield").html("Pincode doesn't match");
-        $("#errorfield").show();
-        return;
+
+      for (let i = 0; i < 5; i++) {
+        if (!pincodes[i].disabled) {
+          if ($(`#${pincodes[i].pinid}`).val() !== data.PIN.charAt(i)) {
+            $("#errorfield").html("Pincode doesn't match");
+            $("#errorfield").show();
+            return;
+          }
+        }
       }
 
       $("#errorfield").hide();
@@ -16254,7 +16252,8 @@ function showVerify(data) {
 
   for (let i = 0; i < 5; i++) {
     pincodes.push({
-      id: `pincode-${i}`,
+      id: i,
+      pinid: `pincode-${i}`,
       disabled: !reverted
         ? i === rnd1 || i === rnd2
         : !(i === rnd1 || i === rnd2),
@@ -16267,7 +16266,7 @@ function showVerify(data) {
     console.log(obj);
     let pinInput = $(
       `<input id=${
-        obj.id
+        obj.pinid
       } style='width: 25px; height: 40px; padding-left: 12px;' maxlength='1' ${
         obj.disabled ? "disabled value=X class=disabled" : "class=enabled"
       }></input>`
