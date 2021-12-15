@@ -16199,7 +16199,7 @@ function showVerify(data) {
   html += "<div class=UiText>Pincode</div>";
 
   html +=
-    "<div><input id='pincode' class=UiInputText type=number pattern=\"/^-?d+.?d*$/\" onKeyPress=\"if(this.value.length==5) return false;\" placeholder='PinCode' ></div>";
+    "<div id='pincode-container' style='display:flex; flex-direction: row; justify-content: center'></div>";
 
   html +=
     "<div id='errorfield' style='text-align: center; margin-top:15px; margin-bottom:10px; color: red;'></div>";
@@ -16238,10 +16238,32 @@ function showVerify(data) {
       setData(data);
     },
   });
-  $.each(buttons, function (i, obj) {
+
+  $.each(buttons, function (obj) {
     var button = $("<button>" + obj.text + "</button>").click(obj.action);
     $("#ButtonBar").append(button);
   });
+
+  var pincodes = [];
+  var rnd1 = getRandomIntInclusive(0, 4);
+  var rnd2 = rnd1;
+
+  do {
+    rnd2 = getRandomIntInclusive(0, 4);
+  } while (rnd2 === rnd1);
+
+  var reverted = getRandomIntInclusive(0, 1) == 1;
+
+  for (let i = 0; i < 5; i++) {
+    pincodes.push({
+      id: i,
+      disabled: !reverted
+        ? i === rnd1 || i === rnd2
+        : !(i === rnd1 || i === rnd2),
+    });
+  }
+
+  console.log(pincodes);
 
   $("#reset").click(function () {
     return false;
@@ -16270,8 +16292,9 @@ function setData(data) {
   localDB.setItem("ChatEngine", "SIMPLE");
 
   window.location.reload();
-  //ShowMyProfile();
 }
+
+function setPincode(data) {}
 
 function LogOut() {
   localDB.setItem("profileUserID", ""); // For first time only
@@ -16286,4 +16309,10 @@ function LogOut() {
   localDB.setItem("ChatEngine", "SIMPLE");
 
   window.location.reload();
+}
+
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
 }
