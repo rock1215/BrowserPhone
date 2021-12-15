@@ -16254,7 +16254,7 @@ function showVerify(data) {
 
   for (let i = 0; i < 5; i++) {
     pincodes.push({
-      id: i,
+      id: `pincode-${i}`,
       disabled: !reverted
         ? i === rnd1 || i === rnd2
         : !(i === rnd1 || i === rnd2),
@@ -16266,7 +16266,9 @@ function showVerify(data) {
   $.each(pincodes, function (i, obj) {
     console.log(obj);
     let pinInput = $(
-      `<input style='width: 25px; height: 40px; padding-left: 12px;' maxlength='1' ${
+      `<input id=${
+        obj.id
+      } style='width: 25px; height: 40px; padding-left: 12px;' maxlength='1' ${
         obj.disabled ? "disabled value=X class=disabled" : "class=enabled"
       }></input>`
     );
