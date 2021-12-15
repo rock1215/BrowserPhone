@@ -16410,6 +16410,7 @@ function showNewPincode(logdata) {
       })
         .then((response) => response.json())
         .then((data) => {
+          console.log(data);
           if (data.error === 0) {
             let result = data.data;
             result.email = $("#email").val();
