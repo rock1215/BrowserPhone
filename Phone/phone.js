@@ -16261,13 +16261,16 @@ function showVerify(data) {
     });
   }
 
+  var setFirst = false;
+
   $.each(pincodes, function (i, obj) {
     console.log(obj);
     let pinInput = $(
       `<input style='width: 25px; height: 40px; padding-left: 12px;' maxlength='1' ${
-        obj.disabled ? "disabled value=X class=disabled" : ""
+        obj.disabled ? "disabled value=X class=disabled" : "class=enabled"
       }></input>`
     );
+
     pinInput.bind("input", function () {
       var $this = $(this);
       setTimeout(function () {
@@ -16277,6 +16280,13 @@ function showVerify(data) {
         }
       }, 0);
     });
+
+    if (!setFirst && !obj.disabled) {
+      setTimeout(function () {
+        pinInput.focus();
+      }, 0);
+    }
+
     $("#pincode-container").append(pinInput);
   });
 
