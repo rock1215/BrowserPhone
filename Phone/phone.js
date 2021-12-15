@@ -1354,7 +1354,7 @@ function ShowMyProfileMenu(obj) {
   });
   items.push({ icon: null, text: "-" });
   //items.push({ icon: "fa fa-user-plus", text: lang.add_someone, value: 3 });
-  items.push({ icon: null, text: "-" });
+  //items.push({ icon: null, text: "-" });
   if (AutoAnswerEnabled == true) {
     items.push({
       icon: "fa fa-phone",
