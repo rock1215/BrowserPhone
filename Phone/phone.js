@@ -16261,7 +16261,11 @@ function showVerify(data) {
     });
   }
 
-  console.log(pincodes);
+  $.each(pincodes, function (obj) {
+    console.log(obj);
+    var pinInput = $("<input style='width: 30px; height: 40px;'/>");
+    $("#pincode-container").append(pinInput);
+  });
 
   $("#reset").click(function () {
     return false;
