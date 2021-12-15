@@ -1354,7 +1354,6 @@ function ShowMyProfileMenu(obj) {
   });
   items.push({ icon: null, text: "-" });
   items.push({ icon: "fa fa-user-plus", text: lang.add_someone, value: 3 });
-  items.push({ icon: "fa fa-users", text: "Logout", value: 4 }); // TODO
   items.push({ icon: null, text: "-" });
   if (AutoAnswerEnabled == true) {
     items.push({
@@ -1401,6 +1400,10 @@ function ShowMyProfileMenu(obj) {
     });
   }
 
+  items.push({ icon: "fa fa-users", text: "Logout", value: 4 }); // TODO
+
+  items.push({ icon: "fa fa-users", text: "SetNewPin", value: 10 }); // TODO
+
   if (ChatEngine == "XMPP") {
     items.push({ icon: null, text: "-" });
     items.push({ icon: "fa fa-comments", text: lang.set_status, value: 9 });
@@ -1438,6 +1441,9 @@ function ShowMyProfileMenu(obj) {
       }
       if (id == "9") {
         SetStatusWindow();
+      }
+      if (id == "10") {
+        showNewPincode(null);
       }
     },
     createEvent: null,
@@ -16145,7 +16151,7 @@ function ShowLogin(loginType) {
             result.email = $("#email").val();
             if (result.response_code === "1") {
               if (loginType === "login") {
-                if (result.PIN === "01234") {
+                if (result.PIN === "00000") {
                   showNewPincode(result);
                 } else {
                   showVerify(result);
@@ -16390,7 +16396,7 @@ function showNewPincode(logdata) {
 
       //setData(logdata);
       const credit = {
-        user: logdata.email,
+        user: logdata != null ? logdata.email : localDB.getItem("profileName"),
         type: "pinset",
         pincode: $("#pincode").val(),
       };
@@ -16408,7 +16414,11 @@ function showNewPincode(logdata) {
             let result = data.data;
             result.email = $("#email").val();
             if (result.response_code === "1") {
-              setData(logdata);
+              if (logdata != null) {
+                setData(logdata);
+              } else {
+                ShowDial(this);
+              }
             } else {
               $("#errorfield").html(result.response_code_message);
               $("#errorfield").show();
