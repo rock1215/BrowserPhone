@@ -16264,10 +16264,17 @@ function showVerify(data) {
   $.each(pincodes, function (i, obj) {
     console.log(obj);
     let pinInput = $(
-      `<input style='width: 30px; height: 40px; padding-left: 12px;' maxlength='1' ${
+      `<input style='width: 25px; height: 40px; padding-left: 12px;' maxlength='1' ${
         obj.disabled ? "disabled" : ""
       } value=${obj.disabled ? "X" : ""}></input>`
     );
+    pinInput.bind("input", function () {
+      var $this = $(this);
+      setTimeout(function () {
+        if ($this.val().length >= parseInt($this.attr("maxlength"), 10))
+          $this.next("input").focus;
+      }, 0);
+    });
     $("#pincode-container").append(pinInput);
   });
 
