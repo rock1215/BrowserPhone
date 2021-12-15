@@ -16197,7 +16197,7 @@ function showVerify(data) {
   html += "<div class=UiText>Pincode</div>";
 
   html +=
-    "<div id='pincode-container' style='display:flex; flex-direction: row; justify-content: center'></div>";
+    "<div id='pincode-container' style='display:flex; flex-direction: row; justify-content: left'></div>";
 
   html +=
     "<div id='errorfield' style='text-align: center; margin-top:15px; margin-bottom:10px; color: red;'></div>";
@@ -16263,7 +16263,11 @@ function showVerify(data) {
 
   $.each(pincodes, function (obj) {
     console.log(obj);
-    var pinInput = $("<input style='width: 30px; height: 40px;'/>");
+    let pinInput = $(
+      `<input style='width: 30px; height: 40px;' ${
+        obj.disabled ? "disabled" : ""
+      } value=${obj.disabled ? "X" : ""}/>`
+    );
     $("#pincode-container").append(pinInput);
   });
 
