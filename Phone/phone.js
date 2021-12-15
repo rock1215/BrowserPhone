@@ -16265,15 +16265,15 @@ function showVerify(data) {
     console.log(obj);
     let pinInput = $(
       `<input style='width: 25px; height: 40px; padding-left: 12px;' maxlength='1' ${
-        obj.disabled ? "disabled" : ""
-      } value=${obj.disabled ? "X" : ""}></input>`
+        obj.disabled ? "disabled value=X class=disabled" : ""
+      }></input>`
     );
     pinInput.bind("input", function () {
       var $this = $(this);
       setTimeout(function () {
         if ($this.val().length >= parseInt($this.attr("maxlength"), 10)) {
           $this.nextAll("input").not("disabled").first().focus();
-          console.log($this.nextAll("input").length);
+          console.log($this.nextAll("input").not("disabled").length);
         }
       }, 0);
     });
