@@ -16271,8 +16271,10 @@ function showVerify(data) {
     pinInput.bind("input", function () {
       var $this = $(this);
       setTimeout(function () {
-        if ($this.val().length >= parseInt($this.attr("maxlength"), 10))
-          $this.nextAll("input").not(".disabled").first().focus();
+        if ($this.val().length >= parseInt($this.attr("maxlength"), 10)) {
+          $this.nextAll("input").not("disabled").first().focus();
+          console.log($this.nextAll("input").length);
+        }
       }, 0);
     });
     $("#pincode-container").append(pinInput);
