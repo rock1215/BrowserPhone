@@ -16264,9 +16264,9 @@ function showVerify(data) {
   $.each(pincodes, function (i, obj) {
     console.log(obj);
     let pinInput = $(
-      `<input style='width: 30px; height: 40px;' ${
+      `<input style='width: 30px; height: 40px; padding-left: 12px;' ${
         obj.disabled ? "disabled" : ""
-      } value=${obj.disabled ? "X" : ""} ></input>`
+      } value=${obj.disabled ? "X" : ""} maxlenght=1></input>`
     );
     $("#pincode-container").append(pinInput);
   });
