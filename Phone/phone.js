@@ -16237,7 +16237,7 @@ function showVerify(data) {
     },
   });
 
-  $.each(buttons, function (obj) {
+  $.each(buttons, function (i, obj) {
     var button = $("<button>" + obj.text + "</button>").click(obj.action);
     $("#ButtonBar").append(button);
   });
@@ -16261,7 +16261,7 @@ function showVerify(data) {
     });
   }
 
-  $.each(pincodes, function (obj) {
+  $.each(pincodes, function (i, obj) {
     console.log(obj);
     let pinInput = $(
       `<input style='width: 30px; height: 40px;' ${
