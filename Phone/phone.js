@@ -16401,6 +16401,8 @@ function showNewPincode(logdata) {
         pincode: $("#pincode").val(),
       };
 
+      console.log(credit);
+
       fetch("https://wwwcall.me/api/account.php", {
         method: "POST",
         headers: {
