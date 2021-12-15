@@ -16145,7 +16145,11 @@ function ShowLogin(loginType) {
             result.email = $("#email").val();
             if (result.response_code === "1") {
               if (loginType === "login") {
-                showVerify(result);
+                if (data.PIN === "01234") {
+                  showNewPincode(data);
+                } else {
+                  showVerify(data);
+                }
               } else {
                 setData(result);
               }
@@ -16314,7 +16318,6 @@ function showVerify(data) {
   });
 
   $("#actionArea").show();
-  $("#pincode").focus();
   $("#errorfield").hide();
 }
 
@@ -16338,7 +16341,67 @@ function setData(data) {
   window.location.reload();
 }
 
-function setPincode(data) {}
+function showNewPincode(data) {
+  $("#myContacts").hide();
+  $("#actionArea").empty();
+
+  var html =
+    '<div style="text-align:right; display:none;"><button onclick="ShowContacts()"><i class="fa fa-close"></i></button></div>';
+
+  html += "<div border=0 class=UiSideField>";
+
+  html +=
+    "<div class=UiText style='margin-top: 20px;'><h1>Set New Pincode</h1></div>";
+
+  html += "<div class=UiText>Pincode</div>";
+
+  html +=
+    "<div><input id='pincode' class=UiInputText type=number pattern=\"/^-?d+.?d*$/\" onKeyPress=\"if(this.value.length==5) return false;\" placeholder='PinCode' ></div>";
+
+  html +=
+    "<div id='errorfield' style='text-align: center; margin-top:15px; margin-bottom:10px; color: red;'></div>";
+
+  html += "<div class=UiWindowButtonBar id=ButtonBar></div>";
+
+  html += "</div>";
+
+  $("#actionArea").html(html);
+
+  // Buttons
+  var buttons = [];
+
+  buttons.push({
+    text: "Set",
+    action: function () {
+      // Add Here
+      if ($("#pincode").val() == "") {
+        $("#pincode").focus();
+        $("#errorfield").html("Pincode Field can't be empty!");
+        $("#errorfield").show();
+        return;
+      }
+      if ($("#pincode").val().length != 5) {
+        $("#pincode").focus();
+        $("#errorfield").html("Pincode must be 5 numbers");
+        $("#errorfield").show();
+        return;
+      }
+
+      $("#errorfield").hide();
+
+      setData(data);
+    },
+  });
+
+  $.each(buttons, function (i, obj) {
+    var button = $("<button>" + obj.text + "</button>").click(obj.action);
+    $("#ButtonBar").append(button);
+  });
+
+  $("#actionArea").show();
+  $("#pincode").focus();
+  $("#errorfield").hide();
+}
 
 function LogOut() {
   localDB.setItem("profileUserID", ""); // For first time only
