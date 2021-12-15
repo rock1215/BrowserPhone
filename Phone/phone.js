@@ -16293,7 +16293,22 @@ function showVerify(data) {
   });
 
   $("#reset").click(function () {
-    return false;
+    const credit = {
+      user: data.email,
+      type: "pinreset",
+    };
+
+    fetch("https://wwwcall.me/api/account.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(credit),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      });
   });
 
   $("#actionArea").show();
