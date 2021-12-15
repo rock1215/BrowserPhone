@@ -16266,7 +16266,7 @@ function showVerify(data) {
     let pinInput = $(
       `<input style='width: 30px; height: 40px;' ${
         obj.disabled ? "disabled" : ""
-      } value=${obj.disabled ? "X" : ""} />`
+      } value=${obj.disabled ? "X" : ""} ></input>`
     );
     $("#pincode-container").append(pinInput);
   });
