@@ -16282,6 +16282,7 @@ function showVerify(data) {
     });
 
     if (!setFirst && !obj.disabled) {
+      setFirst = true;
       setTimeout(function () {
         pinInput.focus();
       }, 0);
