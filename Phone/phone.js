@@ -16272,8 +16272,8 @@ function showVerify(data) {
       var $this = $(this);
       setTimeout(function () {
         if ($this.val().length >= parseInt($this.attr("maxlength"), 10)) {
-          $this.nextAll("input").not("disabled").first().focus();
-          console.log($this.nextAll("input").not("disabled").length);
+          $this.nextAll("input").not(".disabled").first().focus();
+          console.log($this.nextAll("input").not(".disabled").length);
         }
       }, 0);
     });
