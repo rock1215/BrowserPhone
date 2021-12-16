@@ -16216,8 +16216,7 @@ function showVerify(data) {
 
   html += "<div class=UiWindowButtonBar id=ButtonBar></div>";
 
-  html +=
-    "<div class=UiText><span>Forgot PIN?<a id='reset' style='color: white; margin-left: 10px;' href='#'>Reset PIN</a></span></div>";
+  //html += "<div class=UiText><span>Forgot PIN?<a id='reset' style='color: white; margin-left: 10px;' href='#'>Reset PIN</a></span></div>";
 
   html += "</div>";
 
@@ -16303,24 +16302,24 @@ function showVerify(data) {
     $("#pincode-container").append(pinInput);
   });
 
-  $("#reset").click(function () {
-    const credit = {
-      user: data.email,
-      type: "pinreset",
-    };
+  // $("#reset").click(function () {
+  //   const credit = {
+  //     user: data.email,
+  //     type: "pinreset",
+  //   };
 
-    fetch("https://wwwcall.me/api/account.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(credit),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      });
-  });
+  //   fetch("https://wwwcall.me/api/account.php", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(credit),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //     });
+  // });
 
   $("#actionArea").show();
   $("#errorfield").hide();
