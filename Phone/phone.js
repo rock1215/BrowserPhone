@@ -1309,7 +1309,7 @@ function InitUi() {
   }
 
   // Show Welcome Screen
-  if (welcomeScreen) {
+  if (false /*welcomeScreen*/) {
     if (localDB.getItem("WelcomeScreenAccept") != "yes") {
       OpenWindow(
         welcomeScreen,
